@@ -1,3 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :crypted_password, :fbid, :name, :password_salt, :persistance_token, :twid, :username
+  acts_as_authentic
+  attr_accessible :crypted_password, :fbid, :name, :password_salt, :persistence_token, :twid, :username, :password, :password_confirmation
+  has_many :tours
 end

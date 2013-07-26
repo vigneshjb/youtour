@@ -4,7 +4,7 @@ one:
   username: 
   crypted_password: 
   password_salt: 
-  persistance_token: 
+  persistence_token: 
   name: 
   fbid: 
   twid: MyString
@@ -13,7 +13,7 @@ two:
   username: 
   crypted_password: 
   password_salt: 
-  persistance_token: 
+  persistence_token: 
   name: 
   fbid: 
   twid: MyString
