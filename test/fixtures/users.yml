@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  username: 
+  crypted_password: 
+  password_salt: 
+  persistance_token: 
+  name: 
+  fbid: 
+  twid: MyString
+
+two:
+  username: 
+  crypted_password: 
+  password_salt: 
+  persistance_token: 
+  name: 
+  fbid: 
+  twid: MyString

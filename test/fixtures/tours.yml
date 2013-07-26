@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  from_loc: 
+  to_loc: 
+  doj: 
+  desp: MyString
+
+two:
+  user_id: 
+  from_loc: 
+  to_loc: 
+  doj: 
+  desp: MyString
