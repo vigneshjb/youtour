@@ -3,9 +3,6 @@
 <table>
   <tr>
     <th>Username</th>
-    <th>Crypted password</th>
-    <th>Password salt</th>
-    <th>Persistence token</th>
     <th>Name</th>
     <th>Fbid</th>
     <th>Twid</th>
@@ -17,9 +14,6 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.username %></td>
-    <td><%= user.crypted_password %></td>
-    <td><%= user.password_salt %></td>
-    <td><%= user.persistence_token %></td>
     <td><%= user.name %></td>
     <td><%= user.fbid %></td>
     <td><%= user.twid %></td>

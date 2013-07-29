@@ -25,7 +25,7 @@ class ToursController < ApplicationController
   # GET /tours/new.json
   def new
     @tour = Tour.new
-
+    @user = current_user.id
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tour }
@@ -35,6 +35,7 @@ class ToursController < ApplicationController
   # GET /tours/1/edit
   def edit
     @tour = Tour.find(params[:id])
+    @user = current_user.id
   end
 
   # POST /tours
