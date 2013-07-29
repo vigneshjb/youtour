@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Id</th>
     <th>User</th>
     <th>From loc</th>
     <th>To loc</th>
@@ -14,14 +15,15 @@
 
 <% @tours.each do |tour| %>
   <tr>
+    <td><%= tour.id %></td>
     <td><%= tour.user_id %></td>
     <td><%= tour.from_loc %></td>
     <td><%= tour.to_loc %></td>
     <td><%= tour.doj %></td>
     <td><%= tour.desp %></td>
-    <td><%= link_to 'Show', user_tour_path(params[:user_id]=>@user.id,params[:id]=>tour.id) %></td>
-    <td><%= link_to 'Edit', edit_user_tour_path(tour) %></td>
-    <td><%= link_to 'Destroy', tour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', user_tour_path(@user,tour) %></td>
+    <td><%= link_to 'Edit', edit_user_tour_path(@user,tour) %></td>
+    <td><%= link_to 'Destroy', [@user,tour], method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

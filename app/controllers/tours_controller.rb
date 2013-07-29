@@ -3,7 +3,7 @@ class ToursController < ApplicationController
   # GET /tours.json
   def index
     @user = User.find(params[:user_id])
-    @tours = @user.tours
+    @tours = @user.tours.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -36,7 +36,8 @@ class ToursController < ApplicationController
 
   # GET /tours/1/edit
   def edit
-    @tour = Tour.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:id])
   end
 
   # POST /tours
@@ -59,7 +60,8 @@ class ToursController < ApplicationController
   # PUT /tours/1
   # PUT /tours/1.json
   def update
-    @tour = Tour.find(params[:id])
+    @user = User.find(params[:id])
+    @tour = @user.tours.find(params[:id])
     params[:tour][:user_id]=current_user.id
 
     respond_to do |format|
@@ -76,11 +78,12 @@ class ToursController < ApplicationController
   # DELETE /tours/1
   # DELETE /tours/1.json
   def destroy
-    @tour = Tour.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:id])
     @tour.destroy
 
     respond_to do |format|
-      format.html { redirect_to tours_url }
+      format.html { redirect_to user_tours_path }
       format.json { head :no_content }
     end
   end
