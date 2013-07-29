@@ -19,7 +19,7 @@
     <td><%= tour.to_loc %></td>
     <td><%= tour.doj %></td>
     <td><%= tour.desp %></td>
-    <td><%= link_to 'Show', tour %></td>
+    <td><%= link_to 'Show', user_tour_path(params[:user_id]=>@user.id,params[:id]=>tour.id) %></td>
     <td><%= link_to 'Edit', edit_user_tour_path(tour) %></td>
     <td><%= link_to 'Destroy', tour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

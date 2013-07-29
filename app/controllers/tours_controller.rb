@@ -2,7 +2,8 @@ class ToursController < ApplicationController
   # GET /tours
   # GET /tours.json
   def index
-    @tours = Tour.all
+    @user = User.find(params[:user_id])
+    @tours = @user.tours
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.json
   def show
-    @tour = Tour.find(params[:id])
+    @user=User.find(params[:user_id])
+    @tour = @user.tours.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,8 +26,8 @@ class ToursController < ApplicationController
   # GET /tours/new
   # GET /tours/new.json
   def new
-    @tour = Tour.new
-    @user = current_user.id
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tour }
@@ -35,18 +37,18 @@ class ToursController < ApplicationController
   # GET /tours/1/edit
   def edit
     @tour = Tour.find(params[:id])
-    @user = current_user.id
   end
 
   # POST /tours
   # POST /tours.json
   def create
-    @tour = Tour.new(params[:tour])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.new(params[:tour])
 
     respond_to do |format|
       if @tour.save
-        format.html { redirect_to @tour, notice: 'Tour was successfully created.' }
-        format.json { render json: @tour, status: :created, location: @tour }
+        format.html { redirect_to user_tours_path, notice: 'Tour was successfully created.' }
+        format.json { render json: @tour, status: :created, location: user_tours_path }
       else
         format.html { render action: "new" }
         format.json { render json: @tour.errors, status: :unprocessable_entity }
@@ -58,10 +60,11 @@ class ToursController < ApplicationController
   # PUT /tours/1.json
   def update
     @tour = Tour.find(params[:id])
+    params[:tour][:user_id]=current_user.id
 
     respond_to do |format|
       if @tour.update_attributes(params[:tour])
-        format.html { redirect_to @tour, notice: 'Tour was successfully updated.' }
+        format.html { redirect_to user_tours_path, notice: 'Tour was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
