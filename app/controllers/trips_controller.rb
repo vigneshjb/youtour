@@ -2,7 +2,9 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:tour_id])
+    @trips = @tour.trips.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,9 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @trip = Trip.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:tour_id])
+    @trip = @tour.trips.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +28,9 @@ class TripsController < ApplicationController
   # GET /trips/new
   # GET /trips/new.json
   def new
-    @trip = Trip.new
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:tour_id])
+    @trip = @tour.trips.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +40,21 @@ class TripsController < ApplicationController
 
   # GET /trips/1/edit
   def edit
-    @trip = Trip.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:tour_id])
+    @trip = @tour.trips.find(params[:id])
   end
 
   # POST /trips
   # POST /trips.json
   def create
-    @trip = Trip.new(params[:trip])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:tour_id])
+    @trip = @tour.trips.new(params[:trip])
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+        format.html { redirect_to user_tour_trips_path, notice: 'Trip was successfully created.' }
         format.json { render json: @trip, status: :created, location: @trip }
       else
         format.html { render action: "new" }
@@ -56,11 +66,13 @@ class TripsController < ApplicationController
   # PUT /trips/1
   # PUT /trips/1.json
   def update
-    @trip = Trip.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:tour_id])
+    @trip = @tour.trips.find(params[:id])
 
     respond_to do |format|
       if @trip.update_attributes(params[:trip])
-        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
+        format.html { redirect_to user_tour_trip_path(@user,@tour,@trip), notice: 'Trip was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +84,13 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
-    @trip = Trip.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tour = @user.tours.find(params[:tour_id])
+    @trip = @tour.trips.find(params[:id])
     @trip.destroy
 
     respond_to do |format|
-      format.html { redirect_to trips_url }
+      format.html { redirect_to user_tour_trips_url }
       format.json { head :no_content }
     end
   end

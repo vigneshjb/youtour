@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       #UserMailer.welcome_email.deliver
-      redirect_to home_path, notice: 'Logged in Successfully!!' 
+      redirect_to users_path, notice: 'Logged in Successfully!!' 
     else
       render action: "new" 
     end
@@ -24,6 +24,6 @@ class UserSessionsController < ApplicationController
   def destroy
     @user_session = UserSession.find
     @user_session.destroy
-    redirect_to home_path
+    redirect_to root_path
   end
-end`
+end
