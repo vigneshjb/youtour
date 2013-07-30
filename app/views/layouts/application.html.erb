@@ -9,6 +9,9 @@
 <body>
 
 <div id="user_nav">
+  <%= link_to "Home", home_path %> |
+  <%= link_to "About Us", aboutus_path %> |
+  <%= link_to "Keep in touch", contact_path %> |
   <% if current_user %>
     <%= link_to "Edit Profile", edit_user_path(current_user)%> |
     <%= link_to "Logout", logout_path %>
