@@ -69,6 +69,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def addFbid (uid)
+    @user = current_user
+    if @user.fbid != uid
+      params[:user][:fbid]=uid
+      if @user.update_attributes(params[:user])
+        redirect_to @user
+      end
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

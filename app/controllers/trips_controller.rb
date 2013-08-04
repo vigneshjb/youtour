@@ -94,4 +94,12 @@ class TripsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def reqs
+    p "#############################################################"
+    @trips = Trip.find(:all, :conditions => {:request_by => current_user.id}) 
+    respond_to do |format|
+      format.html 
+    end
+  end
 end

@@ -7,7 +7,8 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 
 gem 'faker'
-gem 'authlogic'
+gem 'authlogic', '~>3.3.0'
+gem 'httpclient'
 
 group :development do
 	gem 'mysql'

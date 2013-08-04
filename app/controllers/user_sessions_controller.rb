@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  require 'net/http'
   # GET /user_sessions/new
   # GET /user_sessions/new.json
   def new

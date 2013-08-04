@@ -1,0 +1,27 @@
+<h1>My requests</h1>
+<% if @trips %>
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Tour</th>
+      <th>Request by</th>
+      <th>Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  <% @trips.each do |trip| %>
+    <tr>
+      <td><%= trip.id %></td>
+      <td><%= trip.tour_id %></td>
+      <td><%= trip.request_by %></td>
+      <td><%= trip.status %></td>
+      <td><%= link_to 'Show', user_tour_trip_path(@user,@tour,trip) %></td>
+      <td><%= link_to 'Edit', edit_user_tour_trip_path(@user,@tour,trip) %></td>
+      <td><%= link_to 'Destroy', [@user,@tour,trip], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  nothing interesting here!!
+<% end %>

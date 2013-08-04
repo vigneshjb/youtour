@@ -1,2 +1,6 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Welcome to YouTour <br /><br /> !!always tour together!!</h1>
+<% if current_user %>
+	<li> <%= link_to "View all Tours that you have posted", user_tours_path %> </li>
+	<li><%= link_to "View all Trips that you have requested for", user_reqs_path%></li>
+<% end %>
+<li> <%=link_to "login with Fb",fb_login_path %> </li>
