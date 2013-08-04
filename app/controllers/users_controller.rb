@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
@@ -65,16 +64,6 @@ class UsersController < ApplicationController
       else
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def addFbid (uid)
-    @user = current_user
-    if @user.fbid != uid
-      params[:user][:fbid]=uid
-      if @user.update_attributes(params[:user])
-        redirect_to @user
       end
     end
   end

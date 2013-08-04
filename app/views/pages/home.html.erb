@@ -1,6 +1,7 @@
 <h1>Welcome to YouTour <br /><br /> !!always tour together!!</h1>
 <% if current_user %>
-	<li> <%= link_to "View all Tours that you have posted", user_tours_path %> </li>
-	<li><%= link_to "View all Trips that you have requested for", user_reqs_path%></li>
-<% end %>
+	<li><%= link_to "View all Tours that you have posted", user_tours_path(current_user) %></li>
+	<li><%= link_to "View all Trips that you have requested for", user_reqs_path(current_user)%></li>
+<% else %>
 <li> <%=link_to "login with Fb",fb_login_path %> </li>
+<% end %>

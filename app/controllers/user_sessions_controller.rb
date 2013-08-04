@@ -18,7 +18,6 @@ class UserSessionsController < ApplicationController
       render action: "new" 
     end
   end
-  
 
   # DELETE /user_sessions/1
   # DELETE /user_sessions/1.json

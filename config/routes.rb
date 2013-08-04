@@ -1,7 +1,7 @@
 Youtour::Application.routes.draw do
-get 'reqs', to: 'trips#reqs', :action => ":index", :controller => ":trips"
 get 'fb_login', to: 'fb_sessions#new_fb_session'
   resources :users do
+    get 'reqs', to: 'trips#reqs', :action => ":index", :controller => ":trips"
     resources :tours do
       resources :trips 
     end
