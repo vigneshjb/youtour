@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726015051) do
+ActiveRecord::Schema.define(:version => 20130913165302) do
+
+  create_table "fbuser", :force => true do |t|
+    t.string   "photo_link"
+    t.string   "fbid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "tours", :force => true do |t|
     t.integer  "user_id"

@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -56,13 +55,26 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = current_user
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_password
+    @userSession = UserSession.find
+    p '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$PASSWORD$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    if (params[:user][:old_password]==@userSession.password)
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: 'Password was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "change_password" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -79,4 +91,9 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def change_password
+    @user = current_user
+  end
+
 end

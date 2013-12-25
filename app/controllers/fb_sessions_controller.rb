@@ -4,27 +4,32 @@ class FbSessionsController < ApplicationController
     client = HTTPClient.new
     @appid='582845488404281'
     @appsec='421d10d0271b4a046f997e376e11fa9b'
-    @uri='http://6bv0.t.proxylocal.com/fb_login'
+    @permissions= 'email,publish_actions'
+    @uri='http://zwvr.t.proxylocal.com/fb_login'
     
     if (!params[:code])
-      redirect_to "https://www.facebook.com/dialog/oauth?client_id=#{@appid}&redirect_uri=#{@uri}&scope=email,user_likes,publish_actions,friends_about_me"
+      redirect_to "https://www.facebook.com/dialog/oauth?client_id=#{@appid}&redirect_uri=#{@uri}&scope=#{@permissions}"
     else 
       @url= "https://graph.facebook.com/oauth/access_token?client_id=#{@appid}&redirect_uri=#{@uri}&client_secret=#{@appsec}&code=#{params[:code]}"
-      result = client.get_content(@url)
-      access_token=result.scan(/([^&]*)&/).last.first
-      @url= "https://graph.facebook.com/me?"+access_token+"&fields=username,email,name"
-      result = client.get_content(@url)
-      data = ActiveSupport::JSON.decode(result)
+      access_token=client.get_content(@url).scan(/([^&]*)&/).last.first
+      @url= "https://graph.facebook.com/me?"+access_token+"&fields=username,email,name,picture"
+      data = ActiveSupport::JSON.decode(client.get_content(@url))
       email=data["email"]
-      @user = User.find(:all, :conditions=>["username LIKE ?",email], :limit=>"1")
-       if @user.first
-          @user_session = UserSession.create(@user.first)
+      p '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+      p access_token
+      #@user = User.find(:all, :conditions=>["username LIKE ?",email], :limit=>"1")
+      @user = User.where(username: email)
+       if @user
+          if @user.fbid!=data["username"]
+            @user.fbid=data["username"]
+          @user_session = UserSession.create(@user)
           @user_session.save
+          #@fbuser = Fbuser.find_by
           redirect_to users_path
        else
-          password = Faker::Base.regexify('/^([0-9][A-Z][a-z]){2}$/')
+          #password = Faker::Base.regexify('/^([0-9][A-Z][a-z]){2}$/')
+          password = 'abcd'
           @newuser=User.create(:username=>email, :name=>data["name"], :password=>password, :password_confirmation=>password, :fbid=>data["username"])
-          #notify password to user and make him change it !!
           @user_session = UserSession.create(@newuser)
           @user_session.save
           redirect_to @newuser
